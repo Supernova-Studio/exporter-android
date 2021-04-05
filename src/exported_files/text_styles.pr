@@ -14,7 +14,7 @@
         <item name="android:textSize">{{ typographyToken.value.fontSize.measure }}sp</item>
         {[ const letterSpacing = typographyToken.value.letterSpacing /]}
         {[ if @compare.nonnull(letterSpacing) ]}
-        <item name="android:letterSpacing" tools:ignore="NewApi">{{ letterSpacing.measure }}sp</item>
+        <item name="android:letterSpacing" tools:ignore="NewApi">{{ letterSpacing.measure }}</item>
         {[/]}
         {[ const lineHeight = typographyToken.value.lineHeight /]}
         {[ if @compare.nonnull(lineHeight) ]}
@@ -24,6 +24,11 @@
         {[ if @boolean.and( @compare.nonnull(font), @compare.equals(font.family.lowercased(), "roboto") ) ]}
           {[ const isRegular = @boolean.or( @compare.null(font.subfamily), @compare.equals(font.subfamily.lowercased(), "regular") ) /]}
         <item name="android:fontFamily">sans-serif{[ if @boolean.not(isRegular) ]}-{{ font.subfamily.lowercased() }}{[/]}</item>
+        {[ let fontStyle = "normal" /]}
+        {[ if @ds.fonts.isItalic(font) ]}
+          {[ set fontStyle = "italic" /]}
+        {[/]}
+        <item name="android:textStyle">{{ fontStyle }}</item>
         {[/]}
 
     </style>
