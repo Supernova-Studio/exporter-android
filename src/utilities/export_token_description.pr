@@ -1,3 +1,0 @@
-{[ if @boolean.and(@compare.nonnull(context.description), @boolean.not(@compare.equals(context.description, ""))) ]}
-{{ @js.createDocumentationComment(context.description, "  ") }}
-{[/]}
