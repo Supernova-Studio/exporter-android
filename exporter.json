@@ -1,12 +1,14 @@
 {
     "id": "io.supernova.android",
-    "name": "Android Exporter",
+    "name": "Android",
     "description": "Android token and style exporter",
     "source_dir": "src",
     "version": "1.0.0",
     "tags": [
         "Android",
-        "Tokens"
+        "Tokens",
+        "Styles",
+        "Colors"
     ],
     "author": "Vsevolod Krasnov",
     "organization": "Supernova",
