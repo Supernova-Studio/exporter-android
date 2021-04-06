@@ -37,11 +37,15 @@
           {[ set subfamilyName = subfamilyName.trimmingSpaces()  /]}
           {[ set subfamilyName = subfamilyName.replacing(" ", "-") /]}
         <item name="android:fontFamily">{{ familyName }}{[ if @boolean.not(@compare.empty(subfamilyName)) ]}-{{ subfamilyName }}{[/]}</item>
-          {[ let fontStyle = "normal" /]}
+          {[ let fontStyles = [] /]}
           {[ if @ds.fonts.isItalic(font) ]}
-            {[ set fontStyle = "italic" /]}
+            {[ set fontStyles = @js.arrayConcat(fontStyles, "italic") /]}
           {[/]}
-        <item name="android:textStyle">{{ fontStyle }}</item>
+          {[ if @ds.fonts.isBold(font) ]}
+            {[ set fontStyles = @js.arrayConcat(fontStyles, "bold") /]}
+          {[/]}
+          {[ let textStyle = @js.arrayJoin(fontStyles, "|") /]}
+        <item name="android:textStyle">{[ if @compare.empty(textStyle) ]}normal{[ else ]}{{ textStyle }}{[/]}</item>
         <item name="android:textFontWeight" tools:ignore="NewApi">{{ @ds.fonts.weight(font) }}</item>
         {[/]}
     </style>
