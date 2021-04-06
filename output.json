@@ -11,6 +11,10 @@
         {
             "invoke": "text_styles.pr",
             "write_to": "app_text_styles.xml"
+        },
+        {
+            "invoke": "radii.pr",
+            "write_to": "app_radii.xml"
         }
     ]
 }
