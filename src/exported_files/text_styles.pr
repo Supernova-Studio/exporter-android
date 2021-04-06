@@ -25,6 +25,10 @@
           {[ let familyName = font.family.lowercased()  /]}
           {[ set familyName = familyName.replacing("roboto", "sans-serif") /]}
           {[ set familyName = familyName.replacing("dancing script", "cursive") /]}
+          {[ set familyName = familyName.replacing("droid sans mono", "monospace") /]}
+          {[ set familyName = familyName.replacing("cutive mono", "serif-monospace") /]}
+          {[ set familyName = familyName.replacing("coming soon", "casual") /]}
+          {[ set familyName = familyName.replacing("carrois gothic sc", "sans-serif-smallcaps") /]}
           {[ set familyName = familyName.replacing(" ", "-") /]}
           {[ let subfamilyName = font.subfamily.lowercased()  /]}
           {[ set subfamilyName = subfamilyName.replacing("regular", "") /]}
