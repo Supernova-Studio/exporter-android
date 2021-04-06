@@ -1,5 +1,16 @@
 /**
  * 
+ * @param {string} text 
+ * @param {string} indentationString 
+ * 
+ * @returns {string}
+ */
+function indentMultilineText(text, indentationString) {
+    return text.trim().replaceAll("\n", "\n" + indentationString)
+}
+
+/**
+ * 
  * @param {{name: string, isRoot: boolean, path: Array<string>}} tokenGroup 
  * 
  * @returns {Array<string>}
@@ -32,6 +43,7 @@ function arrayJoin(array, separator) {
     return array.join(separator)
 }
 
+Pulsar.registerFunction("indentMultilineText", indentMultilineText)
 Pulsar.registerFunction("createFullTokenGroupPath", createFullTokenGroupPath)
 Pulsar.registerFunction("arrayConcat", arrayConcat)
 Pulsar.registerFunction("arrayJoin", arrayJoin)
