@@ -42,7 +42,7 @@
             {[ set fontStyle = "italic" /]}
           {[/]}
         <item name="android:textStyle">{{ fontStyle }}</item>
-        <item name="android:fontWeight" tools:ignore="NewApi">{{ @ds.fonts.weight(font) }}</item>
+        <item name="android:textFontWeight" tools:ignore="NewApi">{{ @ds.fonts.weight(font) }}</item>
         {[/]}
     </style>
   {[/]}
