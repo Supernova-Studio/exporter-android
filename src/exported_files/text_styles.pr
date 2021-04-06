@@ -10,7 +10,7 @@
     {[ const fullTokenPath = @js.arrayConcat(fullTokenGroupPath, typographyToken.name) /]}
     {[ const fullTokenName = @js.arrayJoin(fullTokenPath, " ").camelcased(false) /]}
 
-    <style name="{{ fullTokenName }}">    
+    <style name="{{ fullTokenName }}">
         <item name="android:textSize">{{ typographyToken.value.fontSize.measure }}sp</item>
         {[ const letterSpacing = typographyToken.value.letterSpacing /]}
         {[ if @compare.nonnull(letterSpacing) ]}
@@ -21,19 +21,27 @@
         <item name="lineHeight">{{ lineHeight.measure }}sp</item>
         {[/]}
         {[ const font = typographyToken.value.font /]}
-        {[ if @boolean.and( @compare.nonnull(font), @compare.equals(font.family.lowercased(), "roboto") ) ]}
-          {[ const isRegular = @boolean.or( @compare.null(font.subfamily), @compare.equals(font.subfamily.lowercased(), "regular") ) /]}
-        <item name="android:fontFamily">sans-serif{[ if @boolean.not(isRegular) ]}-{{ font.subfamily.lowercased() }}{[/]}</item>
-        {[ let fontStyle = "normal" /]}
-        {[ if @ds.fonts.isItalic(font) ]}
-          {[ set fontStyle = "italic" /]}
-        {[/]}
+        {[ if @compare.nonnull(font) ]}
+          {[ let familyName = font.family.lowercased()  /]}
+          {[ set familyName = familyName.replacing("roboto", "sans-serif") /]}
+          {[ set familyName = familyName.replacing("dancing script", "cursive") /]}
+          {[ set familyName = familyName.replacing(" ", "-") /]}
+          {[ let subfamilyName = font.subfamily.lowercased()  /]}
+          {[ set subfamilyName = subfamilyName.replacing("regular", "") /]}
+          {[ set subfamilyName = subfamilyName.replacing("bold", "") /]}
+          {[ set subfamilyName = subfamilyName.replacing("italic", "") /]}
+          {[ set subfamilyName = subfamilyName.trimmingSpaces()  /]}
+          {[ set subfamilyName = subfamilyName.replacing(" ", "-") /]}
+        <item name="android:fontFamily">{{ familyName }}{[ if @boolean.not(@compare.empty(subfamilyName)) ]}-{{ subfamilyName }}{[/]}</item>
+          {[ let fontStyle = "normal" /]}
+          {[ if @ds.fonts.isItalic(font) ]}
+            {[ set fontStyle = "italic" /]}
+          {[/]}
         <item name="android:textStyle">{{ fontStyle }}</item>
+        <item name="android:fontWeight" tools:ignore="NewApi">{{ @ds.fonts.weight(font) }}</item>
         {[/]}
-
     </style>
   {[/]}
-
 
 {[/]}
 
