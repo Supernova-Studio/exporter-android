@@ -31,7 +31,6 @@ The exporter will generate a file per style type. Here's an example of the expor
     </style>
 
 </resources>
-}
 ```
 
 You can generate all production ready-code either manually using Supernova's [VS Code extension](https://marketplace.visualstudio.com/items?itemName=SupernovaIO.pulsar-vsc-extension), or automate your code delivery pipeline using Supernova [Design Continuous Delivery](https://supernova.io/automated-code-delivery).
