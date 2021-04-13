@@ -43,7 +43,20 @@ function arrayJoin(array, separator) {
     return array.join(separator)
 }
 
+ function groupFontsByFamily(fonts) {
+    var groupBy = function(xs, key) {
+        return xs.reduce(function(rv, x) {
+          (rv[x[key].toLowerCase()] = rv[x[key].toLowerCase()] || []).push(x);
+          return rv;
+        }, {});
+      };
+
+    return groupBy(fonts, "family")
+}
+
+
 Pulsar.registerFunction("indentMultilineText", indentMultilineText)
 Pulsar.registerFunction("createFullTokenGroupPath", createFullTokenGroupPath)
 Pulsar.registerFunction("arrayConcat", arrayConcat)
 Pulsar.registerFunction("arrayJoin", arrayJoin)
+Pulsar.registerFunction("groupFontsByFamily", groupFontsByFamily)

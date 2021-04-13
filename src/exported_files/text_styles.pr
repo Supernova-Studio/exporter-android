@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+{[ let fontsMap = @init.dictionary() /]}
 {[ const typographyTokensTree = @ds.tokenGroupTreeByType("Typography") /]}
 {[ traverse typographyTokensTree property subgroups into typographyTokenGroup ]}
   {[ let fullTokenGroupPath = @js.createFullTokenGroupPath(typographyTokenGroup) /]}
@@ -26,21 +27,11 @@
         {[/]}
         {[ const font = typographyToken.value.font /]}
         {[ if @compare.nonnull(font) ]}
-          {[ let familyName = font.family.lowercased()  /]}
-          {[ set familyName = familyName.replacing("roboto", "sans-serif") /]}
-          {[ set familyName = familyName.replacing("dancing script", "cursive") /]}
-          {[ set familyName = familyName.replacing("droid sans mono", "monospace") /]}
-          {[ set familyName = familyName.replacing("cutive mono", "serif-monospace") /]}
-          {[ set familyName = familyName.replacing("coming soon", "casual") /]}
-          {[ set familyName = familyName.replacing("carrois gothic sc", "sans-serif-smallcaps") /]}
-          {[ set familyName = familyName.replacing(" ", "-") /]}
-          {[ let subfamilyName = font.subfamily.lowercased()  /]}
-          {[ set subfamilyName = subfamilyName.replacing("regular", "") /]}
-          {[ set subfamilyName = subfamilyName.replacing("bold", "") /]}
-          {[ set subfamilyName = subfamilyName.replacing("italic", "") /]}
-          {[ set subfamilyName = subfamilyName.trimmingSpaces()  /]}
-          {[ set subfamilyName = subfamilyName.replacing(" ", "-") /]}
-        <item name="android:fontFamily">{{ familyName }}{[ if @boolean.not(@compare.empty(subfamilyName)) ]}-{{ subfamilyName }}{[/]}</item>
+          {[ let familyName = font.family.snakecased()()  /]}
+          {[ let subfamilyName = font.subfamily.snakecased()  /]}
+          {[ let fontName = familyName.suffixed("_").suffixed(subfamilyName) /]}
+          {[ set fontsMap = fontsMap.add(fontName, font) /]}
+        <item name="android:fontFamily">@font/{{ fontName }}</item>
           {[ let fontStyles = [] /]}
           {[ if @ds.fonts.isItalic(font) ]}
             {[ set fontStyles = @js.arrayConcat(fontStyles, "italic") /]}
@@ -58,3 +49,4 @@
 {[/]}
 
 </resources>
+{[ inject "fonts" context fontsMap /]}
