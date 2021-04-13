@@ -18,7 +18,7 @@
         <item name="android:textSize">{{ typographyToken.value.fontSize.measure }}sp</item>
         {[ const letterSpacing = typographyToken.value.letterSpacing /]}
         {[ if @compare.nonnull(letterSpacing) ]}
-        <item name="android:letterSpacing" tools:ignore="NewApi">{{ letterSpacing.measure }}</item>
+        <item name="android:letterSpacing">{{ letterSpacing.measure }}</item>
         {[/]}
         {[ const lineHeight = typographyToken.value.lineHeight /]}
         {[ if @compare.nonnull(lineHeight) ]}
