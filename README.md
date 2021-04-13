@@ -11,6 +11,7 @@ The Android exporter allows you to **produce production-ready code for all produ
 
 - [x] Color definitions
 - [x] Text Styles
+- [x] Fonts
 - [x] Radii
 - [x] Measures
 
@@ -22,14 +23,32 @@ The exporter will generate a file per style type. Here's an example of the expor
 
     <style name="11_regular_italic">
         <item name="android:textSize">11sp</item>
-        <item name="android:letterSpacing" tools:ignore="NewApi">0.3</item>
-        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:letterSpacing">0.3</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
         <item name="android:textStyle">normal</item>
         <item name="android:textFontWeight" tools:ignore="NewApi">400</item>
     </style>
 
 </resources>
 ```
+
+A corresponding **font/roboto.xml** file will be created:
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<font-family xmlns:app="http://schemas.android.com/apk/res-auto">  
+
+    <font
+        app:fontStyle="normal"
+        app:fontWeight="400"
+        app:font="@font/roboto_regular" />
+
+</font-family>    
+```
+
+Note: exporter doesn't provide required font files (.ttf, .otf). Please, download all necessary font files from your Design System Management system or Google Fonts service. After that, name them accordingly and put next to the corresponding font XML files.
+
+For example above, a Roboto Regular font needs to be downloaded from https://fonts.google.com/, named as **roboto_regular.ttf** and placed next to **font/roboto.xml** file.
 
 You can generate all production ready-code either manually using Supernova's [VS Code extension](https://marketplace.visualstudio.com/items?itemName=SupernovaIO.pulsar-vsc-extension), or automate your code delivery pipeline using Supernova [Design Continuous Delivery](https://supernova.io/automated-code-delivery).
 
