@@ -7,14 +7,14 @@
   {[ const radiusTokenInGroups = @ds.tokensByGroupId(radiusTokenGroup.id) /]}
   {[ for radiusToken in radiusTokenInGroups ]}
     {[ const fullTokenPath = @js.arrayConcat(fullTokenGroupPath, radiusToken.name) /]}
-    {[ const fullTokenName = @js.arrayJoin(fullTokenPath, " ").snakecased() /]}
+    {[ const fullTokenName = @js.arrayJoin(fullTokenPath, " ") /]}
     
     {[ if @boolean.and(@compare.nonnull(radiusToken.description), @boolean.not(@compare.equals(radiusToken.description, ""))) ]}
     <!-- 
         {{ @js.indentMultilineText(radiusToken.description, "        ") }} 
     -->
     {[/]}
-    <dimen name="{{ fullTokenName }}">{{ radiusToken.value.radius.measure }}dp</dimen>{[/]}
+    <dimen name="{[ inject "export_token_name" context fullTokenName /]}">{{ radiusToken.value.radius.measure }}dp</dimen>{[/]}
 
 
 {[/]}

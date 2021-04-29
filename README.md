@@ -21,7 +21,7 @@ The exporter will generate a file per style type. Here's an example of the expor
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="11_regular_italic">
+    <style name="_11RegularItalic">
         <item name="android:textSize">11sp</item>
         <item name="android:letterSpacing">0.3</item>
         <item name="android:fontFamily">@font/roboto_regular</item>
@@ -60,7 +60,7 @@ Once you have run the exporter against your design system, you can start using t
 
 ```xml
 <TextView
-    style="@style/11_regular_italic"
+    style="@style/_11RegularItalic"
     android:id="@+id/text_home"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"

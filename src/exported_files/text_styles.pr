@@ -8,14 +8,14 @@
   {[ const typographyTokenInGroups = @ds.tokensByGroupId(typographyTokenGroup.id) /]}
   {[ for typographyToken in typographyTokenInGroups ]}
     {[ const fullTokenPath = @js.arrayConcat(fullTokenGroupPath, typographyToken.name) /]}
-    {[ const fullTokenName = @js.arrayJoin(fullTokenPath, " ").snakecased() /]}
+    {[ const fullTokenName = @js.arrayJoin(fullTokenPath, " ") /]}
     
     {[ if @boolean.and(@compare.nonnull(typographyToken.description), @boolean.not(@compare.equals(typographyToken.description, ""))) ]}
     <!-- 
         {{ @js.indentMultilineText(typographyToken.description, "        ") }} 
     -->
     {[/]}
-    <style name="{{ fullTokenName }}">
+    <style name="{[ inject "export_token_name" context fullTokenName /]}">
         <item name="android:textSize">{{ typographyToken.value.fontSize.measure }}sp</item>
         {[ const letterSpacing = typographyToken.value.letterSpacing /]}
         {[ if @compare.nonnull(letterSpacing) ]}
