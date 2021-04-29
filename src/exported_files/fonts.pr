@@ -1,0 +1,31 @@
+{[ let familyToFonts = @js.groupFontsByFamily(context.values()) /]}
+
+{[ let i = 0 /]}
+{[ for family in familyToFonts.keys() ]}
+  {[ let fonts = familyToFonts.values().at(i) /]}
+  
+  {[ let writeToFilepath = family.snakecased().extended("/font/", ".xml") /]}
+  {[ emit file writeToFilepath ]}
+<?xml version="1.0" encoding="utf-8"?>
+<font-family xmlns:app="http://schemas.android.com/apk/res-auto">  
+    {[ for font in fonts ]}
+
+    {[ let familyName = font.family.snakecased()()  /]}
+    {[ let subfamilyName = font.subfamily.snakecased()  /]}
+    {[ let fontName = familyName.suffixed("_").suffixed(subfamilyName) /]}
+    {[ let fontStyle = "normal" /]}
+    {[ if @ds.fonts.isItalic(font) ]}
+      {[ set fontStyle = "italic" /]}
+    {[/]}
+    <font
+        app:fontStyle="{{ fontStyle }}"
+        app:fontWeight="{{ @ds.fonts.weight(font) }}"
+        app:font="@font/{{ fontName }}" />
+    {[/]}
+
+</font-family>    
+
+  {[/]}
+
+  {[ set i = i.addedBy(1) /]}
+{[/]}
