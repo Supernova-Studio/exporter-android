@@ -4,7 +4,7 @@
 {[ for family in familyToFonts.keys() ]}
   {[ let fonts = familyToFonts.values().at(i) /]}
   
-  {[ let writeToFilepath = family.snakecased().extended("/font/", ".xml") /]}
+  {[ let writeToFilepath = family.snakecased().extended("res/font/", ".xml") /]}
   {[ emit file writeToFilepath ]}
 <?xml version="1.0" encoding="utf-8"?>
 <font-family xmlns:app="http://schemas.android.com/apk/res-auto">  

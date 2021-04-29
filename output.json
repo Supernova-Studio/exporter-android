@@ -2,19 +2,19 @@
     "blueprints": [
         {
             "invoke": "colors.pr",
-            "write_to": "app_colors.xml"
+            "write_to": "res/values/app_colors.xml"
         },
         {
             "invoke": "dimens.pr",
-            "write_to": "app_dimens.xml"
+            "write_to": "res/values/app_dimens.xml"
         },
         {
             "invoke": "text_styles.pr",
-            "write_to": "app_text_styles.xml"
+            "write_to": "res/values/app_text_styles.xml"
         },
         {
             "invoke": "radii.pr",
-            "write_to": "app_radii.xml"
+            "write_to": "res/values/app_radii.xml"
         }
     ]
 }
