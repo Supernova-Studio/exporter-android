@@ -26,7 +26,6 @@ The exporter will generate a file per style type. Here's an example of the expor
         <item name="android:letterSpacing">0.3</item>
         <item name="android:fontFamily">@font/roboto_regular</item>
         <item name="android:textStyle">normal</item>
-        <item name="android:textFontWeight" tools:ignore="NewApi">400</item>
     </style>
 
 </resources>

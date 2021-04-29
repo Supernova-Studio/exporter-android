@@ -21,10 +21,6 @@
         {[ if @compare.nonnull(letterSpacing) ]}
         <item name="android:letterSpacing">{{ letterSpacing.measure }}</item>
         {[/]}
-        {[ const lineHeight = typographyToken.value.lineHeight /]}
-        {[ if @compare.nonnull(lineHeight) ]}
-        <item name="lineHeight">{{ lineHeight.measure }}sp</item>
-        {[/]}
         {[ const font = typographyToken.value.font /]}
         {[ if @compare.nonnull(font) ]}
           {[ let familyName = font.family.snakecased()()  /]}
@@ -41,7 +37,6 @@
           {[/]}
           {[ let textStyle = @js.arrayJoin(fontStyles, "|") /]}
         <item name="android:textStyle">{[ if @compare.empty(textStyle) ]}normal{[ else ]}{{ textStyle }}{[/]}</item>
-        <item name="android:textFontWeight" tools:ignore="NewApi">{{ @ds.fonts.weight(font) }}</item>
         {[/]}
     </style>
   {[/]}
