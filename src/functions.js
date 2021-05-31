@@ -6,7 +6,7 @@
  * @returns {string}
  */
 function indentMultilineText(text, indentationString) {
-    return text.trim().replaceAll("\n", "\n" + indentationString)
+    return text.trim().split("\n").join("\n" + indentationString);
 }
 
 /**
