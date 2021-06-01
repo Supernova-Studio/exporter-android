@@ -14,7 +14,7 @@
         {{ @js.indentMultilineText(radiusToken.description, "        ") }} 
     -->
     {[/]}
-    <dimen name="{[ inject "export_token_name" context fullTokenName /]}">{{ radiusToken.value.radius.measure }}dp</dimen>{[/]}
+    <dimen name="{[ inject "export_snakecased_token_name" context fullTokenName /]}">{{ radiusToken.value.radius.measure }}dp</dimen>{[/]}
 
 
 {[/]}

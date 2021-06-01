@@ -15,7 +15,7 @@
         {{ @js.indentMultilineText(typographyToken.description, "        ") }} 
     -->
     {[/]}
-    <style name="{[ inject "export_token_name" context fullTokenName /]}">
+    <style name="{[ inject "export_camelcased_token_name" context fullTokenName /]}">
         <item name="android:textSize">{{ typographyToken.value.fontSize.measure }}sp</item>
         {[ const letterSpacing = typographyToken.value.letterSpacing /]}
         {[ if @compare.nonnull(letterSpacing) ]}

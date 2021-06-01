@@ -13,7 +13,7 @@
         {{ @js.indentMultilineText(colorToken.description, "        ") }} 
     -->
     {[/]}
-    <color name="{[ inject "export_token_name" context fullTokenName /]}">{[ inject "export_color_value" context colorToken.value /]}</color>
+    <color name="{[ inject "export_snakecased_token_name" context fullTokenName /]}">{[ inject "export_color_value" context colorToken.value /]}</color>
     {[/]}
 
 

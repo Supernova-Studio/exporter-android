@@ -1,0 +1,2 @@
+{[ const snakecased = context.snakecased() /]}
+{[ inject "export_token_name" context snakecased /]}

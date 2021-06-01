@@ -14,7 +14,7 @@
         {{ @js.indentMultilineText(measureToken.description, "        ") }} 
     -->
     {[/]}
-    <dimen name="{[ inject "export_token_name" context fullTokenName /]}">{{ measureToken.value.measure }}dp</dimen>{[/]} 
+    <dimen name="{[ inject "export_snakecased_token_name" context fullTokenName /]}">{{ measureToken.value.measure }}dp</dimen>{[/]} 
 
 {[/]}
 

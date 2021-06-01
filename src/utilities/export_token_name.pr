@@ -1,4 +1,4 @@
-{[ const camelcased = context.camelcased(true) /]}
-{[ const firstChar = camelcased.substring(0, 1) /]}
+{[ const tokenName = context /]}
+{[ const firstChar = tokenName.substring(0, 1) /]}
 {[ const isDigit = @js.isDigit(firstChar) /]}
-{[ if isDigit ]}_{[/]}{{ camelcased }}
+{[ if isDigit ]}_{[/]}{{ tokenName }}
