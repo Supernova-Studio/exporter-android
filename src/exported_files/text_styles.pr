@@ -8,22 +8,18 @@
   {[ const typographyTokenInGroups = @ds.tokensByGroupId(typographyTokenGroup.id) /]}
   {[ for typographyToken in typographyTokenInGroups ]}
     {[ const fullTokenPath = @js.arrayConcat(fullTokenGroupPath, typographyToken.name) /]}
-    {[ const fullTokenName = @js.arrayJoin(fullTokenPath, " ").snakecased() /]}
+    {[ const fullTokenName = @js.arrayJoin(fullTokenPath, " ") /]}
     
     {[ if @boolean.and(@compare.nonnull(typographyToken.description), @boolean.not(@compare.equals(typographyToken.description, ""))) ]}
     <!-- 
         {{ @js.indentMultilineText(typographyToken.description, "        ") }} 
     -->
     {[/]}
-    <style name="{{ fullTokenName }}">
+    <style name="{[ inject "export_camelcased_token_name" context fullTokenName /]}">
         <item name="android:textSize">{{ typographyToken.value.fontSize.measure }}sp</item>
         {[ const letterSpacing = typographyToken.value.letterSpacing /]}
         {[ if @compare.nonnull(letterSpacing) ]}
         <item name="android:letterSpacing">{{ letterSpacing.measure }}</item>
-        {[/]}
-        {[ const lineHeight = typographyToken.value.lineHeight /]}
-        {[ if @compare.nonnull(lineHeight) ]}
-        <item name="lineHeight">{{ lineHeight.measure }}sp</item>
         {[/]}
         {[ const font = typographyToken.value.font /]}
         {[ if @compare.nonnull(font) ]}
@@ -41,7 +37,6 @@
           {[/]}
           {[ let textStyle = @js.arrayJoin(fontStyles, "|") /]}
         <item name="android:textStyle">{[ if @compare.empty(textStyle) ]}normal{[ else ]}{{ textStyle }}{[/]}</item>
-        <item name="android:textFontWeight" tools:ignore="NewApi">{{ @ds.fonts.weight(font) }}</item>
         {[/]}
     </style>
   {[/]}

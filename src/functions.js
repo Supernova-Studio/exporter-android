@@ -54,9 +54,17 @@ function arrayJoin(array, separator) {
     return groupBy(fonts, "family")
 }
 
+/**
+ * 
+ * @param {string} s
+ */
+function isDigit(c) {
+    return c >= '0' && c <= '9';
+}
 
 Pulsar.registerFunction("indentMultilineText", indentMultilineText)
 Pulsar.registerFunction("createFullTokenGroupPath", createFullTokenGroupPath)
 Pulsar.registerFunction("arrayConcat", arrayConcat)
 Pulsar.registerFunction("arrayJoin", arrayJoin)
 Pulsar.registerFunction("groupFontsByFamily", groupFontsByFamily)
+Pulsar.registerFunction("isDigit", isDigit)
