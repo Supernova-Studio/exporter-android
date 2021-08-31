@@ -14,12 +14,12 @@
     {[ let subfamilyName = font.subfamily.snakecased()  /]}
     {[ let fontName = familyName.suffixed("_").suffixed(subfamilyName) /]}
     {[ let fontStyle = "normal" /]}
-    {[ if ds.fonts.isItalic(font) ]}
+    {[ if ds.isFontItalic(font) ]}
       {[ fontStyle = "italic" /]}
     {[/]}
     <font
         app:fontStyle="{{ fontStyle }}"
-        app:fontWeight="{{ ds.fonts.weight(font) }}"
+        app:fontWeight="{{ ds.fontWeight(font) }}"
         app:font="@font/{{ fontName }}" />
     {[/]}
 
