@@ -1,4 +1,4 @@
-{[ let familyToFonts = @js.groupFontsByFamily(context.values()) /]}
+{[ let familyToFonts = groupFontsByFamily(context.values()) /]}
 
 {[ let i = 0 /]}
 {[ for family in familyToFonts.keys() ]}
@@ -14,12 +14,12 @@
     {[ let subfamilyName = font.subfamily.snakecased()  /]}
     {[ let fontName = familyName.suffixed("_").suffixed(subfamilyName) /]}
     {[ let fontStyle = "normal" /]}
-    {[ if @ds.fonts.isItalic(font) ]}
-      {[ set fontStyle = "italic" /]}
+    {[ if ds.fonts.isItalic(font) ]}
+      {[ fontStyle = "italic" /]}
     {[/]}
     <font
         app:fontStyle="{{ fontStyle }}"
-        app:fontWeight="{{ @ds.fonts.weight(font) }}"
+        app:fontWeight="{{ ds.fonts.weight(font) }}"
         app:font="@font/{{ fontName }}" />
     {[/]}
 
@@ -27,5 +27,5 @@
 
   {[/]}
 
-  {[ set i = i.addedBy(1) /]}
+  {[ i = i.addedBy(1) /]}
 {[/]}

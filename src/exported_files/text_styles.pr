@@ -1,42 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-{[ let fontsMap = @init.dictionary() /]}
-{[ const typographyTokensTree = @ds.tokenGroupTreeByType("Typography") /]}
+{[ let fontsMap = {} /]}
+{[ const typographyTokensTree = ds.tokenGroupTreeByType("Typography") /]}
 {[ traverse typographyTokensTree property subgroups into typographyTokenGroup ]}
-  {[ let fullTokenGroupPath = @js.createFullTokenGroupPath(typographyTokenGroup) /]}
-  {[ const typographyTokenInGroups = @ds.tokensByGroupId(typographyTokenGroup.id) /]}
+  {[ let fullTokenGroupPath = createFullTokenGroupPath(typographyTokenGroup) /]}
+  {[ const typographyTokenInGroups = ds.tokensByGroupId(typographyTokenGroup.id) /]}
   {[ for typographyToken in typographyTokenInGroups ]}
-    {[ const fullTokenPath = @js.arrayConcat(fullTokenGroupPath, typographyToken.name) /]}
-    {[ const fullTokenName = @js.arrayJoin(fullTokenPath, " ") /]}
+    {[ const fullTokenPath = arrayConcat(fullTokenGroupPath, typographyToken.name) /]}
+    {[ const fullTokenName = arrayJoin(fullTokenPath, " ") /]}
     
-    {[ if @boolean.and(@compare.nonnull(typographyToken.description), @boolean.not(@compare.equals(typographyToken.description, ""))) ]}
+    {[ if (typographyToken.description && typographyToken.description !== "") ]}
     <!-- 
-        {{ @js.indentMultilineText(typographyToken.description, "        ") }} 
+        {{ indentMultilineText(typographyToken.description, "        ") }} 
     -->
     {[/]}
     <style name="{[ inject "export_camelcased_token_name" context fullTokenName /]}">
         <item name="android:textSize">{{ typographyToken.value.fontSize.measure }}sp</item>
         {[ const letterSpacing = typographyToken.value.letterSpacing /]}
-        {[ if @compare.nonnull(letterSpacing) ]}
+        {[ if letterSpacing ]}
         <item name="android:letterSpacing">{{ letterSpacing.measure }}</item>
         {[/]}
         {[ const font = typographyToken.value.font /]}
-        {[ if @compare.nonnull(font) ]}
+        {[ if font ]}
           {[ let familyName = font.family.snakecased()()  /]}
           {[ let subfamilyName = font.subfamily.snakecased()  /]}
           {[ let fontName = familyName.suffixed("_").suffixed(subfamilyName) /]}
-          {[ set fontsMap = fontsMap.add(fontName, font) /]}
+          {[ fontsMap = fontsMap.add(fontName, font) /]}
         <item name="android:fontFamily">@font/{{ fontName }}</item>
           {[ let fontStyles = [] /]}
-          {[ if @ds.fonts.isItalic(font) ]}
-            {[ set fontStyles = @js.arrayConcat(fontStyles, "italic") /]}
+          {[ if ds.isFontItalic(font) ]}
+            {[ fontStyles = arrayConcat(fontStyles, "italic") /]}
           {[/]}
-          {[ if @ds.fonts.isBold(font) ]}
-            {[ set fontStyles = @js.arrayConcat(fontStyles, "bold") /]}
+          {[ if ds.isFontItalic(font) ]}
+            {[ fontStyles = arrayConcat(fontStyles, "bold") /]}
           {[/]}
-          {[ let textStyle = @js.arrayJoin(fontStyles, "|") /]}
-        <item name="android:textStyle">{[ if @compare.empty(textStyle) ]}normal{[ else ]}{{ textStyle }}{[/]}</item>
+          {[ let textStyle = arrayJoin(fontStyles, "|") /]}
+        <item name="android:textStyle">{{ (textStyle.count() === 0) ? "normal" : textStyle}}</item>
         {[/]}
     </style>
   {[/]}
