@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-{[ const radiusTokensTree = @ds.tokenGroupTreeByType("Radius") /]}
+{[ const radiusTokensTree = ds.tokenGroupTreeByType("Radius") /]}
 {[ traverse radiusTokensTree property subgroups into radiusTokenGroup ]}
-  {[ let fullTokenGroupPath = @js.createFullTokenGroupPath(radiusTokenGroup) /]}
-  {[ const radiusTokenInGroups = @ds.tokensByGroupId(radiusTokenGroup.id) /]}
+  {[ let fullTokenGroupPath = createFullTokenGroupPath(radiusTokenGroup) /]}
+  {[ const radiusTokenInGroups = ds.tokensByGroupId(radiusTokenGroup.id) /]}
   {[ for radiusToken in radiusTokenInGroups ]}
-    {[ const fullTokenPath = @js.arrayConcat(fullTokenGroupPath, radiusToken.name) /]}
-    {[ const fullTokenName = @js.arrayJoin(fullTokenPath, " ") /]}
+    {[ const fullTokenPath = arrayConcat(fullTokenGroupPath, radiusToken.name) /]}
+    {[ const fullTokenName = arrayJoin(fullTokenPath, " ") /]}
     
-    {[ if @boolean.and(@compare.nonnull(radiusToken.description), @boolean.not(@compare.equals(radiusToken.description, ""))) ]}
+    {[ if (radiusToken.description && radiusToken.description !== "") ]}
     <!-- 
-        {{ @js.indentMultilineText(radiusToken.description, "        ") }} 
+        {{ indentMultilineText(radiusToken.description, "        ") }} 
     -->
     {[/]}
     <dimen name="{[ inject "export_snakecased_token_name" context fullTokenName /]}">{{ radiusToken.value.radius.measure }}dp</dimen>{[/]}
