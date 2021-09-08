@@ -2,7 +2,7 @@
 
 {[ let i = 0 /]}
 {[ for family in familyToFonts.keys() ]}
-  {[ let fonts = familyToFonts.values().at(i) /]}
+  {[ let fonts = familyToFonts.values()[i] /]}
   
   {[ let writeToFilepath = family.snakecased().extended("res/font/", ".xml") /]}
   {[ emit file writeToFilepath ]}
@@ -27,5 +27,5 @@
 
   {[/]}
 
-  {[ i = i.addedBy(1) /]}
+  {[ i = (i + 1) /]}
 {[/]}
