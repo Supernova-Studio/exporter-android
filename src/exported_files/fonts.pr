@@ -10,7 +10,7 @@
 <font-family xmlns:app="http://schemas.android.com/apk/res-auto">  
     {[ for font in fonts ]}
 
-    {[ let familyName = font.family.snakecased()()  /]}
+    {[ let familyName = font.family.snakecased()  /]}
     {[ let subfamilyName = font.subfamily.snakecased()  /]}
     {[ let fontName = familyName.suffixed("_").suffixed(subfamilyName) /]}
     {[ let fontStyle = "normal" /]}
