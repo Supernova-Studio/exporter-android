@@ -23,7 +23,7 @@
         {[/]}
         {[ const font = typographyToken.value.font /]}
         {[ if font ]}
-          {[ let familyName = font.family.snakecased()()  /]}
+          {[ let familyName = font.family.snakecased()  /]}
           {[ let subfamilyName = font.subfamily.snakecased()  /]}
           {[ let fontName = familyName.suffixed("_").suffixed(subfamilyName) /]}
           {[ fontsMap = fontsMap.add(fontName, font) /]}
