@@ -2,7 +2,10 @@
 <resources>
 
 {[ let fontsMap = {} /]}
-{[ const typographyTokensTree = ds.tokenGroupTreeByType("Typography") /]}
+
+{[ const brand = ds.currentBrand() /]}
+{[ const typographyTokensTree = ds.tokenGroupTreeByType("Typography", brand.id) /]}
+
 {[ traverse typographyTokensTree property subgroups into typographyTokenGroup ]}
   {[ let fullTokenGroupPath = createFullTokenGroupPath(typographyTokenGroup) /]}
   {[ const typographyTokenInGroups = ds.tokensByGroupId(typographyTokenGroup.id) /]}

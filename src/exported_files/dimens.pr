@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-{[ const measureTokensTree = ds.tokenGroupTreeByType("Measure") /]}
+{[ const brand = ds.currentBrand() /]}
+{[ const measureTokensTree = ds.tokenGroupTreeByType("Measure", brand.id) /]}
 {[ traverse measureTokensTree property subgroups into measureTokenGroup ]}
   {[ let fullTokenGroupPath = createFullTokenGroupPath(measureTokenGroup) /]}
   {[ const measureTokenInGroups = ds.tokensByGroupId(measureTokenGroup.id) /]}

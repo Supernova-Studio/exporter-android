@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-{[ const radiusTokensTree = ds.tokenGroupTreeByType("Radius") /]}
+{[ const brand = ds.currentBrand() /]}
+{[ const radiusTokensTree = ds.tokenGroupTreeByType("Radius", brand.id) /]}
 {[ traverse radiusTokensTree property subgroups into radiusTokenGroup ]}
   {[ let fullTokenGroupPath = createFullTokenGroupPath(radiusTokenGroup) /]}
   {[ const radiusTokenInGroups = ds.tokensByGroupId(radiusTokenGroup.id) /]}

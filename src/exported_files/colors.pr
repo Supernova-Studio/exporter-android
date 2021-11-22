@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-{[ const colorTokensTree = ds.tokenGroupTreeByType("Color") /]}
+{[ const brand = ds.currentBrand() /]}
+{[ const colorTokensTree = ds.tokenGroupTreeByType("Color", brand.id) /]}
 {[ traverse colorTokensTree property subgroups into colorTokenGroup ]}
   {[ let fullTokenGroupPath = createFullTokenGroupPath(colorTokenGroup) /]}
   {[ const colorTokenInGroups = ds.tokensByGroupId(colorTokenGroup.id) /]}
