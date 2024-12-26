@@ -1,23 +1,23 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
+package design.tokens
 
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.ui.unit.dp
+
+object Shapes {
 {[ const brand = ds.currentBrand() /]}
 {[ const radiusTokensTree = ds.tokenGroupTreeByType("Radius", brand.id) /]}
 {[ traverse radiusTokensTree property subgroups into radiusTokenGroup ]}
-  {[ let fullTokenGroupPath = createFullTokenGroupPath(radiusTokenGroup) /]}
-  {[ const radiusTokenInGroups = ds.tokensByGroupId(radiusTokenGroup.id) /]}
-  {[ for radiusToken in radiusTokenInGroups ]}
-    {[ const fullTokenPath = arrayConcat(fullTokenGroupPath, radiusToken.name) /]}
-    {[ const fullTokenName = arrayJoin(fullTokenPath, " ") /]}
-    
-    {[ if (radiusToken.description && radiusToken.description !== "") ]}
-    <!-- 
-        {{ indentMultilineText(radiusToken.description, "        ") }} 
-    -->
+    {[ let fullTokenGroupPath = createFullTokenGroupPath(radiusTokenGroup) /]}
+    {[ const radiusTokenInGroups = ds.tokensByGroupId(radiusTokenGroup.id) /]}
+    {[ for radiusToken in radiusTokenInGroups ]}
+        {[ const fullTokenPath = arrayConcat(fullTokenGroupPath, radiusToken.name) /]}
+        {[ const fullTokenName = arrayJoin(fullTokenPath, " ") /]}
+        {[ if (radiusToken.description && radiusToken.description !== "") ]}
+        /**
+         * {{ indentMultilineText(radiusToken.description, " * ") }}
+         */
+        {[/]}
+        val {[ inject "export_camelcased_token_name" context fullTokenName /]} = RoundedCornerShape({{ radiusToken.value.radius.measure }}.dp)
     {[/]}
-    <dimen name="{[ inject "export_snakecased_token_name" context fullTokenName /]}">{{ radiusToken.value.radius.measure }}dp</dimen>{[/]}
-
-
 {[/]}
-
-</resources>
+}

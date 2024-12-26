@@ -1,50 +1,38 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
+package design.tokens
 
-{[ let fontsMap = {} /]}
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.unit.sp
 
+object Typography {
 {[ const brand = ds.currentBrand() /]}
 {[ const typographyTokensTree = ds.tokenGroupTreeByType("Typography", brand.id) /]}
-
 {[ traverse typographyTokensTree property subgroups into typographyTokenGroup ]}
-  {[ let fullTokenGroupPath = createFullTokenGroupPath(typographyTokenGroup) /]}
-  {[ const typographyTokenInGroups = ds.tokensByGroupId(typographyTokenGroup.id) /]}
-  {[ for typographyToken in typographyTokenInGroups ]}
-    {[ const fullTokenPath = arrayConcat(fullTokenGroupPath, typographyToken.name) /]}
-    {[ const fullTokenName = arrayJoin(fullTokenPath, " ") /]}
-    
-    {[ if (typographyToken.description && typographyToken.description !== "") ]}
-    <!-- 
-        {{ indentMultilineText(typographyToken.description, "        ") }} 
-    -->
+    {[ let fullTokenGroupPath = createFullTokenGroupPath(typographyTokenGroup) /]}
+    {[ const typographyTokenInGroups = ds.tokensByGroupId(typographyTokenGroup.id) /]}
+    {[ for typographyToken in typographyTokenInGroups ]}
+        {[ const fullTokenPath = arrayConcat(fullTokenGroupPath, typographyToken.name) /]}
+        {[ const fullTokenName = arrayJoin(fullTokenPath, " ") /]}
+        {[ if (typographyToken.description && typographyToken.description !== "") ]}
+        /**
+         * {{ indentMultilineText(typographyToken.description, " * ") }}
+         */
+        {[/]}
+        val {[ inject "export_camelcased_token_name" context fullTokenName /]} = TextStyle(
+            fontSize = {{ typographyToken.value.fontSize.measure }}.sp,
+            {[ const letterSpacing = typographyToken.value.letterSpacing /]}
+            {[ if letterSpacing ]}
+            letterSpacing = {{ letterSpacing.measure }}.sp,
+            {[/]}
+            {[ const font = typographyToken.value.font /]}
+            {[ if font ]}
+            fontFamily = FontFamily.Default,  // You'll need to implement font loading
+            fontWeight = FontWeight.{{ ds.fontWeight(font) }},
+            fontStyle = {[ if ds.isFontItalic(font) ]}FontStyle.Italic{[ else ]}FontStyle.Normal{[/]},
+            {[/]}
+        )
     {[/]}
-    <style name="{[ inject "export_camelcased_token_name" context fullTokenName /]}">
-        <item name="android:textSize">{{ typographyToken.value.fontSize.measure }}sp</item>
-        {[ const letterSpacing = typographyToken.value.letterSpacing /]}
-        {[ if letterSpacing ]}
-        <item name="android:letterSpacing">{{ letterSpacing.measure }}</item>
-        {[/]}
-        {[ const font = typographyToken.value.font /]}
-        {[ if font ]}
-          {[ let familyName = font.family.snakecased()  /]}
-          {[ let subfamilyName = font.subfamily.snakecased()  /]}
-          {[ let fontName = familyName.suffixed("_").suffixed(subfamilyName) /]}
-          {[ fontsMap = fontsMap.add(fontName, font) /]}
-        <item name="android:fontFamily">@font/{{ fontName }}</item>
-          {[ let fontStyles = [] /]}
-          {[ if ds.isFontItalic(font) ]}
-            {[ fontStyles = arrayConcat(fontStyles, "italic") /]}
-          {[/]}
-          {[ if ds.isFontItalic(font) ]}
-            {[ fontStyles = arrayConcat(fontStyles, "bold") /]}
-          {[/]}
-          {[ let textStyle = arrayJoin(fontStyles, "|") /]}
-        <item name="android:textStyle">{{ (textStyle.count() === 0) ? "normal" : textStyle}}</item>
-        {[/]}
-    </style>
-  {[/]}
-
 {[/]}
-
-</resources>
-{[ inject "fonts" context fontsMap /]}
+}

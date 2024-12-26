@@ -71,3 +71,39 @@ Pulsar.registerFunction("arrayConcat", arrayConcat);
 Pulsar.registerFunction("arrayJoin", arrayJoin);
 Pulsar.registerFunction("groupFontsByFamily", groupFontsByFamily);
 Pulsar.registerFunction("isDigit", isDigit);
+
+/**
+ * Converts a hex color value to a long format suitable for Compose Color constructor
+ * @param {string} hex The hex color value
+ * @returns {string} The formatted color value
+ */
+function hexToComposeColor(hex) {
+  const alpha = hex.substring(6, 2);
+  const red = hex.substring(0, 2);
+  const green = hex.substring(2, 2);
+  const blue = hex.substring(4, 2);
+  return `0x${alpha}${red}${green}${blue}L`;
+}
+
+/**
+ * Converts font weight to Compose FontWeight value
+ * @param {number} weight The font weight
+ * @returns {string} The Compose FontWeight value
+ */
+function toComposeFontWeight(weight) {
+  const weightMap = {
+    100: "W100",
+    200: "W200",
+    300: "W300",
+    400: "W400",
+    500: "W500",
+    600: "W600",
+    700: "W700",
+    800: "W800",
+    900: "W900"
+  };
+  return weightMap[weight] || "W400";
+}
+
+Pulsar.registerFunction("hexToComposeColor", hexToComposeColor);
+Pulsar.registerFunction("toComposeFontWeight", toComposeFontWeight);

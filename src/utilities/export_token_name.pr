@@ -1,4 +1,5 @@
 {[ const tokenName = context /]}
 {[ const firstChar = tokenName.substring(0, 1) /]}
 {[ const isDigit = isDigit(firstChar) /]}
-{[ if isDigit ]}_{[/]}{{ tokenName }}
+{[ const kotlinKeywords = ["object", "class", "interface", "fun", "var", "val", "if", "else", "when", "by", "get", "set", "in", "for", "while", "return", "true", "false", "null", "this", "super", "package", "import", "internal", "private", "protected", "public", "sealed", "abstract", "enum"] /]}
+{[ if isDigit || kotlinKeywords.includes(tokenName) ]}_{[/]}{{ tokenName }}

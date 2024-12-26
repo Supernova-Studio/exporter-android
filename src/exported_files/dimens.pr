@@ -1,22 +1,22 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
+package design.tokens
 
+import androidx.compose.ui.unit.dp
+
+object Dimensions {
 {[ const brand = ds.currentBrand() /]}
 {[ const measureTokensTree = ds.tokenGroupTreeByType("Measure", brand.id) /]}
 {[ traverse measureTokensTree property subgroups into measureTokenGroup ]}
-  {[ let fullTokenGroupPath = createFullTokenGroupPath(measureTokenGroup) /]}
-  {[ const measureTokenInGroups = ds.tokensByGroupId(measureTokenGroup.id) /]}
-  {[ for measureToken in measureTokenInGroups ]}
-    {[ const fullTokenPath = arrayConcat(fullTokenGroupPath, measureToken.name) /]}
-    {[ const fullTokenName = arrayJoin(fullTokenPath, " ") /]}
-
-    {[ if (measureToken.description && measureToken.description !== "") ]}
-    <!-- 
-        {{ indentMultilineText(measureToken.description, "        ") }} 
-    -->
+    {[ let fullTokenGroupPath = createFullTokenGroupPath(measureTokenGroup) /]}
+    {[ const measureTokenInGroups = ds.tokensByGroupId(measureTokenGroup.id) /]}
+    {[ for measureToken in measureTokenInGroups ]}
+        {[ const fullTokenPath = arrayConcat(fullTokenGroupPath, measureToken.name) /]}
+        {[ const fullTokenName = arrayJoin(fullTokenPath, " ") /]}
+        {[ if (measureToken.description && measureToken.description !== "") ]}
+        /**
+         * {{ indentMultilineText(measureToken.description, " * ") }}
+         */
+        {[/]}
+        val {[ inject "export_camelcased_token_name" context fullTokenName /]} = {{ measureToken.value.measure }}.dp
     {[/]}
-    <dimen name="{[ inject "export_snakecased_token_name" context fullTokenName /]}">{{ measureToken.value.measure }}dp</dimen>{[/]} 
-
 {[/]}
-
-</resources>
+}

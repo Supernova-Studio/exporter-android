@@ -2,19 +2,19 @@
     "blueprints": [
         {
             "invoke": "colors.pr",
-            "write_to": "res/values/exported_colors.xml"
+            "write_to": "src/main/kotlin/design/tokens/Colors.kt"
         },
         {
             "invoke": "dimens.pr",
-            "write_to": "res/values/exported_dimens.xml"
+            "write_to": "src/main/kotlin/design/tokens/Dimensions.kt"
         },
         {
             "invoke": "text_styles.pr",
-            "write_to": "res/values/exported_text_styles.xml"
+            "write_to": "src/main/kotlin/design/tokens/Typography.kt"
         },
         {
             "invoke": "radii.pr",
-            "write_to": "res/values/exported_radii.xml"
+            "write_to": "src/main/kotlin/design/tokens/Shapes.kt"
         }
     ]
 }
