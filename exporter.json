@@ -1,9 +1,9 @@
 {
   "id": "io.supernova.android",
   "name": "Android",
-  "description": "Android token and style exporter\n\nThe Android exporter allows you to produce production-ready code for all product styles (such as colors) defined inside your design system in such a way that you can immediately use them to style your application elements. Specifically, this exporter automates the coding of color definitions, text styles, fonts, radii, and measures. The exporter will generate a file per style type.\n\nCheck out README.md in the Github repository for more details on usage.",
+  "description": "Export design tokens for Android",
   "source_dir": "src",
-  "version": "1.5.2",
+  "version": "1.5.3",
   "usesBrands": true,
   "tags": ["Android", "Tokens", "Styles", "Colors"],
   "author": "Vsevolod Krasnov",
